@@ -1,6 +1,13 @@
 import { Component } from 'react';
 
 class TOC extends Component {
+    shouldComponentUpdate(newProps, newState) {
+        console.log("==> TOC의 컴포넌트가 수정되어 랜더링됨", newProps.data, this.props.data);
+        if(newProps.data === this.props.data) {
+            return false;  
+        }
+        return true;
+    }
     render () {
         console.log("TOC이 랜더링됨");
         var lists = [];

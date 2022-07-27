@@ -2,11 +2,15 @@ import './App.css';
 import { Component } from 'react';
 import TOC from "./components/TOC"
 import Subject from './components/Subject';
-import Content from './components/Content';
+import ReadContent from './components/ReadContent';
+import Control from './components/Control';
+import CreateContent from './components/CreateContent';
+import UpdateContent from './components/UpdateContent';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.max_content_id = 3;
     this.state = {
       mode : "read",
       selected_content_id : 2,
@@ -18,27 +22,62 @@ class App extends Component {
         {id : 3, title : "JavaScript", desc : "정적인 홈페이지를 동적으로 변환"}
       ]
     }
+  } // constructor 종료
+  //getReadContent 메서드
+  getReadContent() {
+    var i = 0;
+    while(i < this.state.contents.length) {
+      var data = this.state.contents[i];
+      if(data.id === this.state.selected_content_id) {
+        return data;
+      }
+      i++;
+    }
   }
-  render() {
-    console.log("웹앱이 랜더링됨");
-    var _title, _desc=null;
+  //getContent 메서드
+  getContent () {
+    var _title, _desc=null, _article=null, _content;
     if(this.state.mode === "welcome") {
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
+      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
     }else if(this.state.mode === "read") {
       /*_title = this.state.contents[0].title;
       _desc = this.state.contents[0].desc;*/
-      var i = 0;
-      while(i < this.state.contents.length) {
-        var data = this.state.contents[i];
-        if(data.id === this.state.selected_content_id) {
-          _title = data.title;
-          _desc = data.desc;
-          break;
-        }
-        i++;
-      }
+      _content = this.getReadContent();
+      _article = <ReadContent title={_content.title} desc={_content._desc}></ReadContent>
+    }else if(this.state.mode === "create") {
+      _article = <CreateContent onSubmit={function(_title, _desc) {
+        //console.log(_title, _desc);
+        this.max_content_id = this.max_content_id + 1;
+        /*this.state.contents.push({
+          id : this.max_content_id,
+          title : _title,
+          desc : _desc
+        });
+        this.setState({
+          contents:this.state.contents
+        });*/
+        var _contents = this.state.contents.concat({
+          id : this.max_content_id,
+          title : _title,
+          desc : _desc
+        });
+        this.setState({
+          contents:_contents
+        });
+      }.bind(this)}></CreateContent>
+    }else if(this.state.mode === "update") {
+      _content = this.getReadContent();
+      _article = <UpdateContent data = {_content} onSubmit = {function(_title, _desc) {
+
+      }.bind(this)}></UpdateContent>
     }
+    return _article;
+  }//getContent() 종료
+  render() {
+    console.log("웹앱이 랜더링됨");
+    
     console.log("랜더링중...", this);
       return (
         <div className='app'>
@@ -69,12 +108,12 @@ class App extends Component {
             })
           }.bind(this)}
           data={this.state.contents}></TOC>
-          <ul>
-            <li><a href="/create">create</a></li>
-            <li><a href="/update">update</a></li>
-            <li><input type="button" value="delete"></input></li>
-          </ul>
-          <Content title={_title} desc={_desc}></Content>
+          <Control onChangeMode={function(_mode) {
+            this.setState({
+              mode : _mode
+            }); 
+          }.bind(this)}></Control>
+          {/*_article*/this.getContent()}
         </div>
       );
     }
