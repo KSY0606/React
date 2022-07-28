@@ -4,8 +4,16 @@ class UpdateContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title : this.props.data.title
-        }
+            id : this.props.data.id,
+            title : this.props.data.title,
+            desc : this.props.data.desc
+        };
+        this.inputFormHandler = this.inputFormHandler.bind(this);
+    }
+    inputFormHandler(event) {
+      this.setState({
+        [event.target.name] : event.target.value
+      });
     }
     render () {
       console.log("UpdateContent가 랜더링됨");
@@ -17,19 +25,17 @@ class UpdateContent extends Component {
             //debugger;
             //alert("생성되었음");
             this.props.onSubmit(
-              event.target.title.value,
-              event.target.desc.value,
-            )
+              this.state.id,
+              this.state.title,
+              this.state.desc
+            );
           }.bind(this)}>
+            <input type="hidden" name="id" value={this.state.id}></input>
             <p><label>목차이름</label>
-            <input type="text" name="title" placeholder="목차이름" value={this.state.title} onChange={function(event) {
-                this.setState({
-                    title : event.target.vaule
-                })
-            }.bind(this)}></input>
+            <input type="text" name="title" placeholder="목차이름" value={this.state.title} onChange={this.inputFormHandler}></input>
             </p>
             <p><label>세부설명</label>
-            <textarea name="desc" placeholder="세부설명"></textarea>
+            <textarea name="desc" placeholder="세부설명" value={this.state.desc} onChange={this.inputFormHandler}></textarea>
             </p>
             <p><input type="submit" value="수정"></input></p>
           </form>
