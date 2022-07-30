@@ -15,7 +15,7 @@ class CreateContent extends Component {
               event.target.desc.value,
             )
           }.bind(this)}>
-            <p><label>목차이름</label>
+            <p><label id='content1'>목차이름</label>
             <input type="text" name="title" placeholder="목차이름"></input>
             </p>
             <p><label>세부설명</label>
