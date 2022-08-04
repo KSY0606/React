@@ -1,0 +1,94 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    margin: 0 auto;
+}
+/* 틀 */
+.frame {
+    width: 700px;
+    height: 700px;
+    text-align: center;
+    background: linear-gradient(rgb(235, 203, 190),rgb(244, 215, 204));
+}
+/* 카페이름 */
+.cafename {
+    height: 116px;
+    font-size: 1.3em;
+    color: white;
+    text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc;
+    line-height: 116px;
+    letter-spacing: 2px;
+}
+/* 메인 메뉴 */
+.mainMenu {
+    display: inline-block;
+    text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc;
+    width: 231px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: white;
+    border-top: 2px solid rgb(206, 91, 91);
+    border-bottom: 2px solid rgb(206, 91, 91);
+    letter-spacing: 2px;
+}
+.mainMenu:hover, .sideMenu:hover, .sideMenuDetail:hover {
+    color: rgb(212, 137, 137);
+}
+.mainMenu:hover {
+    background-color: rgb(239, 203, 170);
+}
+  /* ul 메뉴리스트*/
+.sideMenuList, .sideMenuListDetail {
+    width: 700px;
+    height: 520px;
+    padding: 0;
+}
+  /* li 메뉴리스트*/
+.sideMenus, .sideMenusDetail {
+    width: 700px;
+    height: 123px;
+    border-bottom: 1px solid rgb(212, 137, 137);
+}
+.sideMenus:nth-last-child(1), .sideMenusDetail:nth-last-child(1) {
+    border-bottom: none;
+}
+/* NavLink */
+.sideMenu, .sideMenuDetail {
+    display: inline-block;
+    width: 700px;
+    color: white;
+    text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc;
+    font-size: 1.4em;
+    font-weight: 600;
+    line-height: 130px;
+    letter-spacing: 2px;
+}
+/* 이미지 */
+.img {
+    float: left;
+    position: relative;
+    top: 5px;
+    left: 10px;
+    width: 70px;
+}
+.sideimg {
+    float: left;
+    width: 70px;
+    position: relative;
+    top: 25px;
+    left: 40px;
+}
+.imgdetail {
+    float: left;
+    width: 130px;
+    position: relative;
+    top: -5px;
+    left: 60px;
+}
+.text {
+    display: inline-block;
+    width: 350px;
+    text-align: left;
+}
